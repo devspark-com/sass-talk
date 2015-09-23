@@ -1,0 +1,653 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title>Tech Talk: Sass · CSS con esteroides</title>
+
+    <meta name="description" content="Tech Talk: Sass">
+    <meta name="author" content="Juan Ignacio Serra">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/default.css" id="theme">
+    <link rel="stylesheet" href="css/theme.css" id="theme_jis">
+
+    <!-- For syntax highlighting -->
+    <!-- <link rel="stylesheet" href="lib/css/zenburn.css"> -->
+    <link href="css/prism-sass.css" rel="stylesheet" />
+
+    <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+    <script>
+      document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="reveal">
+
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+
+        <section class="portada">
+          <h1>Tech Talk: Sass</h1>
+          <h3>CSS con esteroides</h3>
+        </section>
+        <section>
+          <h2>Juan Ignacio Serra</h2><br>
+          <img src="images/samurai.jpg" alt="" class="foto-jis">
+          <div class="col-jis">
+            <ul>
+              <li>@jiserra</li>
+              <li>Diseñador UX/UI</li>
+              <li>Trabajo hace +4 años con preprocesadores</li>
+            </ul>
+          </div>
+          <aside class="notes">
+            <ul>
+              <li>jiserra es mi identidad en internet</li>
+              <li>Trabajo hace 10 años diseñando/desarrollando web y +3 para mobile</li>
+            </ul>
+          </aside>
+        </section>
+
+        <section data-state="alert">
+          <h1 class="spaced">Problema:</h1><h2 class="spaced">En el desarrollo moderno,<br>CSS por si solo no alcanza.</h2>
+          <p>vendor prefixes, @media queries, grillas, font-face, etc, hacen que nuestras hojas de estilos crezcan cada vez más.</p>
+        </section>
+
+        <section data-state="soothe">
+          <h1>Solución:</h1><h2>Preprocesadores!</h2>
+          <ul class="listado-pre">
+            <li><img src="images/sass.png" alt="Sass"></li>
+            <li><img src="images/less.png" alt="Less"></li>
+            <li><img src="images/stylus.png" alt="Stylus"></li>
+          </ul>
+
+        </section>
+
+        <section>
+          <h2>¿Qué son?</h2>
+          <ul>
+            <li class="fragment">Lenguajes que nos ayudan a escribir CSS</li>
+          </ul>
+          <h2 class="fragment">¿Cuáles existen?</h2>
+          <ul>
+            <li class="fragment">Less, Stylus y Sass</li>
+          </ul>
+          <h2 class="fragment">¿Beneficios?</h2>
+          <ul>
+            <li class="fragment">Desarrollo veloz, menor tiempo.</li>
+            <li class="fragment">Variables, iteraciones, funciones…</li>
+            <li class="fragment">Mantenimiento.</li>
+            <li class="fragment"><strong>Jugás mejor al metegol</strong></li>
+          </ul>
+
+          <aside class="notes">
+            <li>Preprocesadores, precompilan, el navegador va a leer CSS puro.</li>
+            <li>Variables, iteraciones, funciones…</li>
+            <li>Mantenimiento.</li>
+          </aside>
+        </section>
+
+        <section>
+          <section>
+            <h1>Sass</h1>
+            <img src="images/sass.png" alt="Sass">
+          </section>
+          <section>
+            <img src="images/graph.jpg" alt="Graph">
+            Resultado de una encuesta hace un par de semanas
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2 class="spaced">2 sintaxis:</h2>
+            <ul>
+              <li class="fragment">SASS: Indentación</li>
+              <li class="fragment">SCSS: Similar a CSS tradicional</li>
+            </ul>
+            <aside class="notes">
+              <ul>
+                <li>Elegí Sass por la comunidad</li>
+                <li>por @extend </li>
+                <li>2 sintaxis.</li>
+              </ul>
+            </aside>
+          </section>
+          <section>
+            <strong>SASS</strong>
+          <pre><code class="language-scss">
+.article
+  border-top: 2px solid #eee
+  h3
+    margin-top: 1em
+          </code></pre><br>
+          <strong>SCSS</strong>
+          <pre><code class="language-scss">
+.article {
+  border-top: 2px solid #eee;
+  h3 {
+    margin-top: 1em;
+  }
+}
+          </code></pre>
+          </section>
+        </section>
+
+        <section>
+          <h1 class="vertical-center">Features</h1>
+        </section>
+
+        <section>
+          <h2>Nesting</h2>
+          <p class="label"><strong>SCSS</strong></p>
+          <pre><code class="language-scss">
+.article {
+  border-top: 2px solid #eee;
+  h3 {
+    margin-top: 1em;
+  }
+}
+          </code></pre>
+          <p class="label2"><strong>CSS</strong></p>
+          <pre><code class="language-scss">.article { border-top: 2px solid #eee; }
+.article h3 { margin-top: 1em; }
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>&amp;</h2>
+          <p>Referencia a los selectores padres</p>
+          <section>
+            <p class="label"><strong>SCSS</strong></p>
+            <pre><code class="language-scss">
+.nav a {
+  color: #fff;
+  &:hover {
+    color: #000;
+  }
+}
+            </code></pre>
+            <p class="label2"><strong>CSS</strong></p>
+            <pre><code class="language-scss">.nav a { color: #fff; }
+.nav a:hover { color: #000; }
+            </code></pre>
+          </section>
+          <section>
+            <p class="label"><strong>SCSS</strong></p>
+            <pre><code class="language-scss">
+.main a {
+  color: #fff;
+  .contacto & { color: #000; }
+}
+            </code></pre>
+            <p class="label2"><strong>CSS</strong></p>
+            <pre><code class="language-scss">.main a { color: #fff; }
+.contacto .main a { color: #000; }
+            </code></pre>
+          </section>
+
+          <aside class="notes">Referencia a los selectores padres de una regla</aside>
+        </section>
+
+        <section>
+          <h2>Variables!</h2>
+          <p class="label"><strong>SCSS</strong></p>
+          <pre><code class="language-scss">
+$link-color: #f0f0f0;
+$link-hover: #ccc;
+.nav a {
+  color: $link-color;
+  &:hover {
+    color: $link-hover;
+  }
+}
+          </code></pre>
+          <p class="label2"><strong>CSS</strong></p>
+          <pre><code class="language-scss">.nav a { color: #f0f0f0; }
+.nav a:hover { color: #ccc; }
+          </code></pre>
+        </section>
+
+        <section>
+          <section>
+            <h2>Operaciones matemáticas</h2>
+            <pre><code class="language-scss">
+1em + 1em; // 2em
+1em - 1em; // 0em
+6px * 4    // 24px
+18px / 3   // 6px
+            </code></pre>
+          </section>
+          <section>
+            <h2>Ejemplo en layout:</h2>
+            <p class="label"><strong>SCSS</strong></p>
+          <pre><code class="language-scss">
+$contenedor: 960px;
+$main: 680px;
+$separacion: 30px;
+
+#sidebar {
+  width: $contenedor - $main - $separacion;
+}
+          </code></pre>
+          <p class="label2"><strong>CSS</strong></p>
+          <pre><code class="language-scss">#sidebar { width: 250px; }
+          </code></pre>
+            <aside class="notes">Ejemplo de cálculos de padding</aside>
+          </section>
+        </section>
+        <section>
+          <h2>Mixins</h2>
+          <section>
+            <p class="label"><strong>SCSS</strong></p>
+            <pre><code class="language-scss">
+@mixin hide-text{
+    overflow:hidden;
+    text-indent:-9000px;
+    display:block;
+}
+h1 {
+    @include hide-text();
+    background-image: url('logo.png');
+}
+            </code></pre>
+          </section>
+          <section>
+            <p class="label2"><strong>CSS</strong></p>
+            <pre><code class="language-scss">h1 {
+  overflow: hidden;
+  text-indent: -9000px;
+  display: block;
+  background-image: url("logo.png");
+}
+            </code></pre>
+          </section>
+          <section>
+            <p class="label"><strong>SCSS</strong></p>
+            <pre><code class="language-scss">
+@mixin borde-color($color) {
+    border: 4px solid $color;
+}
+.imagen {
+    @include borde-color('#f00');
+}
+            </code></pre>
+          <p class="label2"><strong>CSS</strong></p>
+            <pre><code class="language-scss">
+.imagen {
+    border: 4px solid #f00;
+}
+            </code></pre>
+          </section>
+        </section>
+
+        <section>
+          <h2>@extend</h2>
+          <p class="spaced"><strong>(o como Sass ganó la carrera)</strong></p>
+          <section>
+            <p><strong class="label">SCSS</strong></p>
+            <pre><code class="language-scss">
+.button {
+  background-color: blue;
+  text-align: center;
+  padding: 5px 10px;
+}
+.button-delete {
+  @extend .button;
+  background-color: red;
+}
+            </code></pre>
+            <aside class="notes">Podríamos hacer un mixin, pero no es efectivo</aside>
+          </section>
+          <section>
+            <p><strong class="label2">CSS</strong></p>
+            <pre><code class="language-scss">
+.button, .button-delete {
+  background-color: blue;
+  text-align: center;
+  padding: 5px 10px;
+}
+.button-delete {
+  background-color: red;
+}
+            </code></pre>
+          </section>
+        </section>
+        <section>
+          <h2>%: Selectores silenciosos</h2>
+          <p class="label"><strong>SCSS</strong></p>
+          <pre><code class="language-scss">
+%red-bg {
+  background-color: red;
+}
+.window {
+  @extend %red-bg;
+  width: 200px;
+}
+          </code></pre>
+          <p class="label2"><strong>CSS</strong></p>
+          <pre><code class="language-scss">
+.window {
+  background-color: red;
+  width: 200px;
+}
+          </code></pre>
+          <aside class="notes">¿Para que quisieramos esto? Librerías. Hacer una hoja de estilos que usamos siempre.</aside>
+        </section>
+
+
+        <section>
+          <h2>Funciones!</h2>
+          <h3>if, for, while, each, etc…</h3><p class="spaced">(esas cosas que les encantan a los devs)</p>
+          <section>
+            <p><strong class="label">SCSS</strong></p>
+            <pre><code class="language-scss">
+@for $i from 1 to 5 {
+  .col-#{$i} {
+    margin-left: $i * 50px;
+  }
+}
+            </code></pre>
+          </section>
+          <section>
+            <p><strong class="label2">CSS</strong></p>
+            <pre><code class="language-scss">
+.col-1 { margin-left: 50px; }
+.col-2 { margin-left: 100px; }
+.col-3 { margin-left: 150px; }
+.col-4 { margin-left: 200px; }
+            </code></pre>
+          </section>
+          <section>
+            <p><strong class="label">SCSS</strong></p>
+            <pre><code class="language-scss">
+$social: facebook, twitter, plus, github, myspace;
+@each $icono in $social {
+  .#{$icono}-icon {
+    background-image: url('#{$icono}.png');
+  }
+}
+            </code></pre>
+          </section>
+          <section>
+            <p><strong class="label2">CSS</strong></p>
+            <pre><code class="language-scss">
+.facebook-icon { background-image: url("facebook.png"); }
+.twitter-icon { background-image: url("twitter.png"); }
+.plus-icon { background-image: url("plus.png"); }
+.github-icon { background-image: url("github.png"); }
+.myspace-icon { background-image: url("myspace.png"); }
+            </code></pre>
+          </section>
+        </section>
+
+        <section data-state="blackout">
+          <h2>Funciones de colores!</h2>
+          <p class="spaced">(o como usar menos Photoshop)</p>
+          <section>
+            <p class="label"><strong>SCSS</strong></p>
+            <pre><code class="language-scss">
+a { color: rgba(#00f, .75) }
+p { background: rgba(#fff, 0.2) }
+            </code></pre><br>
+            <p class="label2"><strong>CSS</strong></p>
+            <pre><code class="language-scss">
+a { color: rgba(0, 0, 255, 0.75); }
+p { background: rgba(255, 255, 255, 0.2); }
+            </code></pre>
+          </section>
+          <section>
+            <ul class="colores">
+              <li><span>darken(#219ce3, 30%)</span> <img src="images/darken-off.png" alt=""> <img src="images/darken-on.png" alt=""></li>
+              <li><span>lighten(#0c415f, 30%)</span> <img src="images/darken-on.png" alt=""> <img src="images/darken-off.png" alt=""></li>
+            </ul>
+          </section>
+          <section>
+            <ul class="colores">
+              <li><span>saturate(#a46060, 50%)</span> <img src="images/saturate-off.png" alt=""> <img src="images/saturate-on.png" alt=""></li>
+              <li><span>desaturate(#e32121, 50%)</span> <img src="images/saturate-on.png" alt=""> <img src="images/saturate-off.png" alt=""></li>
+            </ul>
+          </section>
+          <section>
+            <h1 class="vertical-center">Demo Time!</h1>
+          </section>
+        </section>
+
+        <section>
+          <h2>@import</h2>
+          <p>Al importar <strong>_archivos.scss</strong> los compila en un archivo final, con solo 1 petición!</p>
+          <pre><code class="language-scss">
+          // css/estilos.scss
+@import "principal";
+@import "reset", "tipografia";
+          </code></pre>
+          <pre><code class="language-scss">
+            &lt;link rel="stylesheet" type="text/css" href="css/estilos.css"&gt;
+          </code></pre>
+        </section>
+
+        <section>
+          <img src="images/bourbon-logo.png" alt="Bourbon" class="noimg">
+          <p class="fragment"><strong>Librería de mixins</strong></p>
+          <p class="fragment"><strong>Funciones de Sass</strong></p>
+          <p class="fragment"><strong>Extensiones</strong></p>
+        </section>
+
+        <section>
+          <h2>Mixins</h2>
+          <section>
+            <dl>
+              <dt>Utilidades generales</dt>
+              <dd>Clearfixes, font stacks, position…</dd>
+              <dt>Vendor prefixes</dt>
+              <dd>Animations, transforms, filters…</dd>
+              <dt>CSS3</dt>
+              <dd>gradients, background-image, columns, flexbox…</dd>
+            </dl>
+          </section>
+          <section>
+            <p class="label"><strong>SCSS</strong></p>
+            <pre><code class="language-scss">
+.animacion {
+  @include animation(scale 1.0s ease-in, slide 2.0s ease);
+}
+            </code></pre><br>
+            <p class="label2"><strong>CSS</strong></p>
+            <pre><code class="language-scss">
+.animacion {
+  -webkit-animation: scale 1s ease-in, slide 2s ease;
+  -moz-animation: scale 1s ease-in, slide 2s ease;
+  animation: scale 1s ease-in, slide 2s ease;
+}
+            </code></pre>
+          </section>
+          <section>
+            <p class="label"><strong>SCSS</strong></p>
+            <pre><code class="language-scss">
+.transformar {
+  @include transform(translateY(50px));
+}
+            </code></pre><br>
+            <p class="label2"><strong>CSS</strong></p>
+            <pre><code class="language-scss">
+.transformar {
+  -webkit-transform: translateY(50px);
+  -moz-transform: translateY(50px);
+  -ms-transform: translateY(50px);
+  -o-transform: translateY(50px);
+  transform: translateY(50px);
+}
+            </code></pre>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <p class="vertical-center">Ejemplo de un mixin para Responsive Design<br><i>(la hice yo, no me la roben!)</i></p>
+          </section>
+          <section>
+            <p class="label"><strong>SCSS</strong></p>
+            <pre><code class="language-scss">
+@mixin breakpoint($point) {
+  @if $point == extra {
+    @media (min-width: 1142px) { @content; }
+  }
+  @else if $point == large {
+    @media (min-width: 954px) { @content; }
+  }
+  @else if $point == medium {
+    @media (min-width: 768px) { @content; }
+  }
+  @else if $point == small {
+    @media (min-width: 480px) { @content; }
+  }
+  @else {
+    @media (min-width: $point) { @content; }
+  }
+}
+
+            </code></pre>
+          </section>
+        </section>
+        <section>
+          <h3>¿Cómo se usa?</h3>
+          <section>
+            <p class="label"><strong>SCSS</strong></p>
+            <pre><code class="language-scss">
+@include breakpoint(small) {
+  header {
+    text-align: left;
+  }
+  .square {
+    width: 300px;
+  }
+}
+            </code></pre>
+            <p class="label2"><strong>CSS</strong></p>
+            <pre><code class="language-scss">
+@media (min-width: 480px) {
+  header {
+    text-align: left;
+  }
+  .square {
+    width: 300px;
+  }
+}
+            </code></pre>
+          </section>
+          <section>
+            <p class="label"><strong>SCSS</strong></p>
+            <pre><code class="language-scss">
+.wrap {
+  padding: 20%;
+  @include breakpoint(medium) {
+    padding: 0 2%;
+  }
+}
+            </code></pre>
+            <p class="label2"><strong>CSS</strong></p>
+            <pre><code class="language-scss">
+.wrap {
+  padding: 20%;
+}
+
+@media (min-width: 768px) {
+  .wrap {
+    padding: 0 2%;
+  }
+}
+            </code></pre>
+          </section>
+        </section>
+
+        <section>
+          <h2>Librerías de Bourbon</h2>
+          <p class="spaced">(agrandando el combo)</p>
+          <p class="nospace"><img width="200" src="http://neat.bourbon.io/images/logotype.svg" alt="" class="noimg"><br>Framework de Grillas</p><br>
+          <p class="nospace"><img width="200" src="http://bitters.bourbon.io/images/bitters-logo.svg" alt="" class="noimg"><br>Estructura y estilos listos (tipo Bootstrap)</p><br>
+          <p class="nospace"><img height="100" src="http://refills.bourbon.io/images/refills-logo.svg" alt="" class="noimg"><br>Componentes y patrones</p>
+        </section>
+
+        <section>
+          <h2 class="spaced">¿Cómo usamos SASS?</h2>
+          <ul>
+            <li class="fragment">En proyectos Ruby</li>
+            <li class="fragment">Instalándolo con Ruby en Mac/Linux</li>
+            <li class="fragment">Apps: <a href="http://sass-lang.com/install">http://sass-lang.com/install</a></li>
+            <li class="fragment"><strong>Libsass:</strong> el fórmula 1</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Resumiendo:</h2>
+          <br>
+          <ul>
+            <li class="fragment">Ahorramos tiempo de desarrollo</li>
+            <li class="fragment">Operaciones matemáticas</li>
+            <li class="fragment">Mixins, funciones de imagenes</li>
+            <li class="fragment">Funciones de colores</li>
+            <li class="fragment">Librerías y componentes con Bourbon</li>
+            <li class="fragment"><strong>Profit!</strong></li>
+          </ul>
+        </section>
+
+        <section data-state="soothe">
+          <h1>¿Preguntas?</h1>
+        </section>
+
+        <section data-state="alert">
+          <h1>Muchas gracias!</h1>
+          <br>
+          <dl>
+            <dt style="color: #fff;">Para practicar sin instalar: </dt>
+            <dd>http://sassmeister.com</dd>
+            <dt style="color: #fff;">Sass oficial:</dt>
+            <dd>http://sass-lang.com</dd>
+            <dt style="color: #fff;">Bourbon:</dt>
+            <dd>http://bourbon.io</dd>
+          </dl>
+        </section>
+
+      </div>
+
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.min.js"></script>
+    <script>
+
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/none
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+      });
+
+    </script>
+    <script src="plugin/prism/prism.js"></script>
+    <script src="plugin/prism/prism-sass.js"></script>
+
+  </body>
+</html>
